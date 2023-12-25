@@ -1,11 +1,11 @@
-class NewsModel {
+class NewModel {
   String? status;
   int? totalResults;
   List<Articles>? articles;
 
-  NewsModel({this.status, this.totalResults, this.articles});
+  NewModel({this.status, this.totalResults, this.articles});
 
-  NewsModel.fromJson(Map<String, dynamic> json) {
+  NewModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
@@ -18,47 +18,30 @@ class NewsModel {
 }
 
 class Articles {
-  Source? source;
-  String? author;
-  String? title;
-  String? description;
-  String? url;
-  String? urlToImage;
-  String? publishedAt;
-  String? content;
-
   Articles(
-      {this.source,
-        this.author,
-        this.title,
-        this.description,
-        this.url,
-        this.urlToImage,
-        this.publishedAt,
-        this.content});
+      {required this.author,
+      required this.title,
+      required this.description,
+      required this.url,
+      required this.urlToImage,
+      required this.publishedAt,
+      required this.content});
+
+  late final String author;
+  late final String title;
+  late final String description;
+  late final String url;
+  late final String urlToImage;
+  late final String publishedAt;
+  late final String content;
 
   Articles.fromJson(Map<String, dynamic> json) {
-    source =
-    json['source'] != null ? new Source.fromJson(json['source']) : null;
-    author = json['author']??'';
-    title = json['title']??'';
-    description = json['description']??'';
-    url = json['url']??'';
-    urlToImage = json['urlToImage']??'';
-    publishedAt = json['publishedAt']??'';
-    content = json['content']??'';
+    author = json['author'] ?? '';
+    title = json['title'] ?? '';
+    description = json['description'] ?? '';
+    url = json['url'] ?? '';
+    urlToImage = json['urlToImage'] ?? '';
+    publishedAt = json['publishedAt'] ?? '';
+    content = json['content'] ?? '';
   }
-}
-
-class Source {
-  String? id;
-  String? name;
-
-  Source({this.id, this.name});
-
-  Source.fromJson(Map<String, dynamic> json) {
-    id = json['id']??'';
-    name = json['name']??'';
-  }
-
 }

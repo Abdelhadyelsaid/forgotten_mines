@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:forgotten_mines/Controller/News/news_cubit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:forgotten_mines/View/Screens/articles_screens.dart';
 import 'package:forgotten_mines/helper/dio_helper.dart';
 
@@ -14,12 +13,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: ArticleScreen());
+    return ScreenUtilInit(
+        designSize: const Size(720, 1280),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: ArticleScreen()));
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forgotten_mines/Controller/News/news_cubit.dart';
-import 'package:forgotten_mines/Model/news_model.dart';
 import 'package:forgotten_mines/View/Widgets/NewsItem.dart';
 
 class ArticleScreen extends StatelessWidget {
@@ -9,16 +8,16 @@ class ArticleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => NewsCubit()..getNews(),
-      child: BlocConsumer<NewsCubit, NewsState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          NewsCubit cubit = NewsCubit.get(context);
-          return Scaffold(
-            body: Column(
+    return Scaffold(
+      body: BlocProvider(
+        create: (context) => NewsCubit()..getNews(),
+        child: BlocConsumer<NewsCubit, NewsState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            NewsCubit cubit = NewsCubit.get(context);
+            return Column(
               children: [
-                state is GetNewsLoading ||cubit.newsModel==null
+                cubit.newsModel == null
                     ? const Center(
                         child: CircularProgressIndicator(
                         color: Colors.black,
@@ -27,7 +26,7 @@ class ArticleScreen extends StatelessWidget {
                         child: GridView.count(
                             padding: const EdgeInsets.only(top: 20),
                             crossAxisCount: 4,
-                            childAspectRatio: 1 / 1.2,
+                            childAspectRatio: 1.4,
                             shrinkWrap: true,
                             physics: const BouncingScrollPhysics(),
                             children: List.generate(
@@ -37,9 +36,9 @@ class ArticleScreen extends StatelessWidget {
                                         cubit.newsModel!.articles![index]))),
                       )
               ],
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }

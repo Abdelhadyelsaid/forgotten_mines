@@ -19,7 +19,8 @@ class DioHelper {
     Map<String, dynamic>? query,
   }) async {
     dio!.options.headers={
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT, DELETE, HEAD",
     };
     return await dio!
         .get(
